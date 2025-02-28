@@ -5,6 +5,8 @@
 body {
     font-family: 'Roboto', sans-serif;
     display: flex;
+    flex-direction: column;
+    gap: 35px;
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -22,7 +24,7 @@ body {
     width: 30px;
     height: 30px;
     background-color: #fff;
-    color: rgb(198, 186, 186);
+    color: rgb(175, 163, 163);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,11 +37,29 @@ body {
 }
 
 .line {
-    width: 70px;
+    width: 80px;
     height: 4px;
     background-color: rgb(217, 207, 207);
 }
 
 .line.active {
     background-color: rgb(60, 167, 255);
+}
+
+.progressButtons {
+    display: flex;
+    gap: 15px;
+}
+
+.button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 33px;
+}
+
+.button:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
 }
