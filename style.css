@@ -3,7 +3,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Mulish', sans-serif;
     display: flex;
     flex-direction: column;
     gap: 35px;
@@ -30,6 +30,7 @@ body {
     justify-content: center;
     border-radius: 50%;
     border: 3px solid rgb(217, 207, 207);
+    transition: border 0.7s ;
 }
 
 .step.active {
@@ -40,6 +41,7 @@ body {
     width: 80px;
     height: 4px;
     background-color: rgb(217, 207, 207);
+    transition: background-color 0.7s;
 }
 
 .line.active {
