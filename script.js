@@ -25,11 +25,7 @@
 
 
 // EINGABE
-let currentStep = 0
-let currentLine = 0
-
 let steps = document.querySelectorAll('.step')
-let lines = document.querySelectorAll('.line')
 let btns = document.querySelectorAll('.buttons')
 let prevBtn = document.querySelector('#prev')
 let nextBtn = document.querySelector('#next')
@@ -48,22 +44,7 @@ let nextBtn = document.querySelector('#next')
 // wenn Step4 active
 //      dann soll nextBtn von abled zu disabled wechseln
 function goToNextStep() {
-    if (currentStep < steps.length - 1) {
-        currentStep++;
-    }
-    steps[currentStep].classList.add('active')
-
-    lines[currentLine].classList.add('active')
-    if (currentLine < lines.length - 1) {
-        currentLine++
-    }
-
-    if (currentStep === 1) {
-        prevBtn.removeAttribute('disabled');
-    }
-    if (currentStep === 3) {
-        nextBtn.setAttribute('disabled', true);
-    }
+    
 }
 
 // Funktion backToPrevStep
@@ -76,22 +57,7 @@ function goToNextStep() {
 // wenn Step2 Klasse active entfernt bekommt
 //      dann soll prevBtn von abled zu disabled wechseln
 function backToPrevStep() {
-    steps[currentStep].classList.remove('active');
-    if (currentStep !== 1) {
-        currentStep--;
-    }
-
-    lines[currentLine].classList.remove('active')
-    if (currentLine !== 0) {
-        currentLine--;
-    }
-
-    if (currentStep === 2) {
-        nextBtn.removeAttribute('disabled');
-    }
-    if (currentStep === 0) {
-        prevBtn.setAttribute('disabled', true);
-    }
+    
 }
 
 
