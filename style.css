@@ -1,3 +1,8 @@
+:root {
+    --line-step-fill: rgb(60, 167, 255);
+    --line-step-empty: rgb(217, 207, 207);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -6,7 +11,6 @@ body {
     font-family: 'Mulish', sans-serif;
     display: flex;
     flex-direction: column;
-    gap: 35px;
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -17,7 +21,35 @@ body {
 
 .progressSteps {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    max-width: 100%;
+    margin-bottom: 30px;
+    width: 350px;
+}
+
+.progressSteps::before {
+    content: '';
+    background-color: var(--line-step-empty);
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: -1;
+}
+
+.progress {
+    background-color: var(--line-step-fill);
+    position: absolute;
+    height: 4px;
+    width: 50%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: background-color 0.7s ease;
 }
 
 .step {
@@ -29,23 +61,12 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    border: 3px solid rgb(217, 207, 207);
-    transition: border 0.7s ;
+    border: 3px solid var(--line-step-empty);
+    transition: border-color 0.7s ease;
 }
 
 .step.active {
-    border: 3px solid rgb(60, 167, 255);
-}
-
-.line {
-    width: 80px;
-    height: 4px;
-    background-color: rgb(217, 207, 207);
-    transition: background-color 0.7s;
-}
-
-.line.active {
-    background-color: rgb(60, 167, 255);
+    border-color: var(--line-step-fill);
 }
 
 .progressButtons {
@@ -54,14 +75,21 @@ body {
 }
 
 .button {
-    background-color: #3498db;
+    background-color: var(--line-step-fill);
     color: #fff;
     border: none;
     border-radius: 6px;
-    padding: 10px 33px;
+    padding: 8px 30px;
+    margin: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.98);
 }
 
 .button:disabled {
-    background-color: #e0e0e0;
+    background-color: var(--line-step-empty);
     cursor: not-allowed;
 }
