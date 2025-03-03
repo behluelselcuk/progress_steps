@@ -2,29 +2,34 @@
 
 // ZIEL
 // Wenn ich den 'Next'-Button drücke:
-//     soll der nächste Step blau umrahmt werden und die line
-//     dazwischen ihre background-color in blau ändern
+//     soll der nächste Step blau umrahmt werden und progress
+//     bis zum nächsten step dessen background-color in blau
+//     ändern
 //     zudem soll dies in einem Übergang passieren
 // vom Übergang vom ersten schritt zum zweiten:
 //     'Prev'-Button von deaktiviert zu aktiviert
 // wenn der letzte Step erreicht ist:
 //     'Next'-Button deaktivieren
-//     alle Steps und lines blau umgeändert sein
+//     alle Steps und ganzer progress blau umgeändert sein
 
 // Wenn ich den 'Prev'-Button drücke:
 //     soll der aktuell blau umrahmte Step seine blaue border
-//     in grau wechseln und die line davor auch
+//     in grau wechseln und progress bis zum vorherigen step
+//     davor auch
 //     zudem soll dies in deinem Übergang passieren
 // Vom Übergang vom vierten Step zum dritten:
 //     'Next'-Button von deaktivieren zu aktiviert
 // wenn der erste Step erreicht ist:
 //     'Prev'-Button deaktivieren
-//     alle steps, bis auf den ersten, und die lines sollen in
+//     alle steps, bis auf den ersten, und progress sollen in
 //     grau umgeändert sein
 
 
 
 // EINGABE
+let currentStep = 0
+
+let progressLine = document.querySelector('.progress')
 let steps = document.querySelectorAll('.step')
 let btns = document.querySelectorAll('.buttons')
 let prevBtn = document.querySelector('#prev')
@@ -34,7 +39,32 @@ let nextBtn = document.querySelector('#next')
 
 // VERARBEITUNG
 
-// funktion goToNextStep
+// Funktion updateProgress
+// updaten des progresslines
+// hinzufügen oder entfernen der Klasse active
+function updateProgress() {
+    const percent = (currentStep / (steps.length -1)) * 100;
+    progressLine.style.width = percent + '%';
+
+    steps.forEach(step => {
+        if (currentStep > 0) {
+            prevBtn.removeAttribute('disabled');
+        }
+        else {
+            prevBtn.setAttribute('disabled', true);
+        }
+
+        if (currentStep === 3) {
+            nextBtn.setAttribute('disabled', true);
+        }
+        else {
+            nextBtn.removeAttribute('disabled');
+        }
+    });
+}
+
+
+// funktion nextStep
 // wenn nächster Step Klasse active nicht hat
 //      Klasse active hinzufügen
 // wenn line zwischen den active-steps Klasse active nicht hat
@@ -43,11 +73,15 @@ let nextBtn = document.querySelector('#next')
 //      dann soll prevBtn von disabled zu abled wechseln
 // wenn Step4 active
 //      dann soll nextBtn von abled zu disabled wechseln
-function goToNextStep() {
-    
+function nextStep() {
+    if (currentStep < steps.length -1) {
+        currentStep++;
+        steps[currentStep].classList.add('active');
+        updateProgress();
+    }
 }
 
-// Funktion backToPrevStep
+// Funktion prevStep
 // wenn aktueller Step Klasse active hat
 //      dann Klasse active entfernen
 // wenn line davor Klasse active hat
@@ -56,15 +90,19 @@ function goToNextStep() {
 //      dann soll nextBtn von disabled zu abled wechseln
 // wenn Step2 Klasse active entfernt bekommt
 //      dann soll prevBtn von abled zu disabled wechseln
-function backToPrevStep() {
-    
+function prevStep() {
+    if (currentStep > 0) {
+        steps[currentStep].classList.remove('active');
+        currentStep--;
+        updateProgress();
+    }
 }
 
 
 // wenn ich auf nextBtn drücke
 //      dann soll Funktion goToNextStep ausgeführt werden
-nextBtn.addEventListener('click', goToNextStep)
+nextBtn.addEventListener('click', nextStep)
 
 // wenn ich auf prevBtn drücke
 //  dann soll Funktion backToPrevStep ausgeführt werden
-prevBtn.addEventListener('click', backToPrevStep)
+prevBtn.addEventListener('click', prevStep)

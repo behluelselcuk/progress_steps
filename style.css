@@ -44,12 +44,12 @@ body {
     background-color: var(--line-step-fill);
     position: absolute;
     height: 4px;
-    width: 50%;
+    width: 0%;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
     z-index: -1;
-    transition: background-color 0.7s ease;
+    transition: width 0.7s ease;
 }
 
 .step {
